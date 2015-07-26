@@ -20,7 +20,7 @@ namespace Linqify
     /// <summary>
     ///     utilities for working with expression trees
     /// </summary>
-    internal class ExpressionTreeHelpers
+    public class ExpressionTreeHelpers
     {
         /// <summary>
         ///     test to see if expression is a binary expression that checks equality with a constant value
@@ -30,7 +30,7 @@ namespace Linqify
         /// <param name="declaringType">type containing member</param>
         /// <param name="memberName">member being checked</param>
         /// <returns>true if member is being checked for equality with value</returns>
-        internal static bool IsMemberEqualsValueExpression(Expression exp, Type declaringType, string memberName)
+        public static bool IsMemberEqualsValueExpression(Expression exp, Type declaringType, string memberName)
         {
             if (exp.NodeType != ExpressionType.Equal
                 && exp.NodeType != ExpressionType.NotEqual

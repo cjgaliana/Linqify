@@ -10,7 +10,7 @@ namespace Linqify
 {
     public abstract class LinqifyContext : IDisposable
     {
-        private IList<CustomApiParameter> _customParameters;
+        protected IList<CustomApiParameter> _customParameters;
 
 
         /// <summary>

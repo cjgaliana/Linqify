@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 
 namespace Linqify
 {
-    internal class MethodCallExpressionTypeFinder : ExpressionVisitor
+    public class MethodCallExpressionTypeFinder : ExpressionVisitor
     {
         private Type _genericType;
 

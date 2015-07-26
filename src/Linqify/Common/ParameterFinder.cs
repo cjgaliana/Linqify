@@ -22,7 +22,7 @@ namespace Linqify
     ///     - called for extracting parameters and values on where clauses
     /// </summary>
     /// <typeparam name="T">type to get parameters for</typeparam>
-    internal class ParameterFinder<T> : ExpressionVisitor
+    public class ParameterFinder<T> : ExpressionVisitor
     {
         /// <summary>
         ///     expression being searched

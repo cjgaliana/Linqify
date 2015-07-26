@@ -7,7 +7,7 @@ namespace Linqify
     /// <summary>
     ///     finds where clauses in the expression tree
     /// </summary>
-    internal class WhereClauseFinder : ExpressionVisitor
+    public class WhereClauseFinder : ExpressionVisitor
     {
         private static readonly string[] WhereMethodNames =
         {
