@@ -12,7 +12,6 @@ namespace Linqify
     {
         protected IList<CustomApiParameter> _customParameters;
 
-
         /// <summary>
         ///     Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
         /// </summary>
@@ -21,7 +20,6 @@ namespace Linqify
             this.Dispose(true);
             GC.SuppressFinalize(this);
         }
-
 
         /// <summary>
         ///     Releases unmanaged and - optionally - managed resources
@@ -48,15 +46,15 @@ namespace Linqify
         public string RawResult { get; protected set; }
 
         public ILinqifyExecutor Executor { get; protected set; }
+
         protected LinqifyContext(ILinqifyExecutor executor)
         {
-            if (executor==null)
+            if (executor == null)
             {
                 throw new ArgumentNullException("executor", "The API executor cannot be null");
             }
             this.Executor = executor;
         }
-
 
         /// <summary>
         ///     Called by QueryProvider to execute queries
@@ -71,7 +69,7 @@ namespace Linqify
             this._customParameters = customParameters;
 
             // request processor is specific to request type (i.e. Status, User, etc.)
-            IRequestProcessor<T> reqProc = CreateRequestProcessor<T>(expression);
+            IRequestProcessor<T> reqProc = this.CreateRequestProcessor<T>(expression);
 
             // get input parameters that go on the REST query URL
             Dictionary<string, string> parameters = GetRequestParameters(expression, reqProc);
@@ -182,54 +180,10 @@ namespace Linqify
 
             string requestType = new MethodCallExpressionTypeFinder().GetGenericType(expression).Name;
 
-            IRequestProcessor<T> req = CreateRequestProcessor<T>(requestType);
+            IRequestProcessor<T> req = this.CreateRequestProcessor<T>(requestType);
             return req;
         }
 
-
-
         protected internal abstract IRequestProcessor<T> CreateRequestProcessor<T>(string requestType) where T : class;
-
-        //protected internal virtual IRequestProcessor<T> CreateRequestProcessor<T>(string requestType)
-        //    where T : class
-        //{
-        //string baseUrl = this.BaseUrl;
-        //IRequestProcessor<T> req;
-
-        //switch (requestType)
-        //{
-        //    case "Project":
-        //        req = new ProjectRequestProcessor<T>();
-        //        break;
-
-        //    case "Team":
-        //        req = new TeamRequestProcessor<T>();
-        //        break;
-
-        //    case "TeamMember":
-        //        req = new TeamMemberRequestProcessor<T>();
-        //        break;
-
-        //    case "Process":
-        //        req = new ProcessRequestProcessor<T>();
-        //        break;
-
-        //    case "Hook":
-        //        req = new HookRequestProcessor<T>();
-        //        break;
-
-        //    default:
-        //        throw new ArgumentException("Type, " + requestType + " isn't a supported LINQ to API entity.",
-        //            "requestType");
-        //}
-
-        //if (baseUrl != null)
-        //{
-        //    req.BaseUrl = baseUrl;
-        //    req.CustomParameters = _customParameters;
-        //}
-
-        //return req;
-        //}
     }
 }
